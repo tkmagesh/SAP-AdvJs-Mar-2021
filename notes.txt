@@ -106,3 +106,5 @@ Function invocation Patterns
     Using the 'apply' method of the function
 
     As a Immediately Invoked Function Expression - IIFE
+
+    Using the 'new' keyword
