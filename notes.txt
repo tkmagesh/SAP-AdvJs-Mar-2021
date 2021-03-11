@@ -104,3 +104,5 @@ Function invocation Patterns
     Using the 'call' method of the function
 
     Using the 'apply' method of the function
+
+    As a Immediately Invoked Function Expression - IIFE

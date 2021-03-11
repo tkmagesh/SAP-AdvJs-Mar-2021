@@ -5,9 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Click Tracker</title>
+    <script>
+        (function myApp(){
+            var count = 0;
+            function onBtnTrackClick(){
+                ++count;
+                document.getElementById('divCounter').innerHTML = count;
+            }
+            function onDocumentLoad(){
+                var btnTrack = document.getElementById('btnTrack');
+                btnTrack.addEventListener('click', onBtnTrackClick);
+            }
+            window.addEventListener('DOMContentLoaded', onDocumentLoad);
+        })();
+    </script>
 </head>
 <body>
-    <input type="button" value="Track" id="btnTrack">
+    <input type="button" value="Track" id="btnTrack" >
     <div id="divCounter">[count]</div>
 </body>
 </html>
