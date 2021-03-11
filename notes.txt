@@ -79,4 +79,28 @@ add(10)
 add()
 add(10,20,30,40,50) (variadic function)
 
+implicit values in a function
+    this
+    arguments
+        - array like object containing all the values passed to the function as arguments
+            - length
+            - indexer support
+                arguments[0]
+                arguments[1]
+                etc
 
+It DOES NOT matter where the function is OR who owns the function
+What matters is HOW the function is invoked
+
+Function invocation Patterns
+    6 ways of invoking a function
+
+    When a function is invoked as method of an object (obj)
+        this -> obj
+
+    When a function is invoked as a 'function'
+        this -> global scope (window in browser)
+
+    Using the 'call' method of the function
+
+    Using the 'apply' method of the function
