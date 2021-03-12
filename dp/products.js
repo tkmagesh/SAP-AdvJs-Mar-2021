@@ -19,6 +19,14 @@ function describe(title, fn){
     console.groupEnd();
 }
 
+function describeGroup(groupedObj){
+    for(var key in groupedObj){
+        describe('Key - [' + key + ']', function(){
+            console.table(groupedObj[key]);
+        })
+    }
+}
+
 describe('Default list of products', function(){
     console.table(products);
 });
@@ -225,12 +233,35 @@ describe('Group', function(){
             return groupedProducts;
         }
         var productsByCategory = groupProductsByCategory();
-        console.log(productsByCategory);
+        describeGroup(productsByCategory);
     });
+    describe('any list by any key', function(){
+        function group(list, keySelectorFn){
+            var result = {};
+            for(var index=0, count = list.length; index < count; index++){
+                var item = list[index],
+                    key = keySelectorFn(item);
+                result[key] = result[key] || [];
+                result[key].push(item);
+            }
+            return result;
+        }
+
+        describe('products by cost', function(){
+            var costKeySelector = function(product){
+                return product.cost > 50 ? 'costly' : 'affordable';
+            };
+            var productsByCost = group(products, costKeySelector);
+            describeGroup(productsByCost);
+        })
+    })
 })
 
 /* 
 A || B => if A is truthy then A is returned else B is returned
 If the boolean equivalent of a value is true then the value is called 'truthy'
 If the boolean equivalent of a value is false then the value is called 'falsy'
+ apply the !! operator to the value to know the boolean equivalent of the value
+0, '', null, undefined, NaN, false -> are falsy
+everything else is truthy
 */
