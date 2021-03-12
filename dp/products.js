@@ -3,7 +3,8 @@ var products = [
 	{id : 9, name : 'Ten', cost : 70, units : 70, category : 'stationary'},
 	{id : 3, name : 'Len', cost : 60, units : 60, category : 'grocery'},
 	{id : 5, name : 'Zen', cost : 30, units : 30, category : 'grocery'},
-	{id : 1, name : 'Ken', cost : 20, units : 80, category : 'utencil'}
+	{id : 1, name : 'Ken', cost : 20, units : 80, category : 'utencil'},
+    {id : 7, name : 'Mouse', cost : 100, units : 20, category : 'electronics'}
 ];
 
 /* 
@@ -208,7 +209,28 @@ describe('Filter', function(){
         })
         
     })
+});
+
+describe('Group', function(){
+    describe('products by category', function(){
+        function groupProductsByCategory(){
+            var groupedProducts = {};
+            for(var index=0, count = products.length; index < count; index++){
+                var product = products[index];
+                /* if (typeof groupedProducts[product.category] === 'undefined')
+                    groupedProducts[product.category] = []; */
+                groupedProducts[product.category] = groupedProducts[product.category] || [];
+                groupedProducts[product.category].push(product);
+            }
+            return groupedProducts;
+        }
+        var productsByCategory = groupProductsByCategory();
+        console.log(productsByCategory);
+    });
 })
 
-/* filter affordable products [cost <= 50]
-filter wellstocked products [units > 30] */
+/* 
+A || B => if A is truthy then A is returned else B is returned
+If the boolean equivalent of a value is true then the value is called 'truthy'
+If the boolean equivalent of a value is false then the value is called 'falsy'
+*/
