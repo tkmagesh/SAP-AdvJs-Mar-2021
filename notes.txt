@@ -133,4 +133,12 @@ Prototypal Inheritance
         ConstructorFunction.prototype is the allowed path to access the base object.
 
 
-    var obj = {}
+coffeescript
+TypeScript
+C# -> Script#
+
+ES6 (ECMAScript 6 / ES2015 / ESNext)
+1. let
+2. const
+3. Array destructuring
+4. Rest operator    
