@@ -166,16 +166,21 @@ describe('Filter', function(){
             return result;
         }
 
+        /* 
         function negate(predicateFn){
             return function(){
                 return !predicateFn.apply(this, arguments)
             };
-        }
+        } 
+        */
+
+        var negate = predicateFn => (...args) => !predicateFn(...args);
 
         describe('filter stationary products', function(){
-            var stationaryProductPredicate = function(p){
+            /* var stationaryProductPredicate = function(p){
                 return p.category === 'stationary';
-            };
+            }; */
+            var stationaryProductPredicate = p => p.category === 'stationary';
             var stationaryProducts = filter(products, stationaryProductPredicate);
             console.table(stationaryProducts);
         })
@@ -248,9 +253,7 @@ describe('Group', function(){
         }
 
         describe('products by cost', function(){
-            var costKeySelector = function(product){
-                return product.cost > 50 ? 'costly' : 'affordable';
-            };
+            var costKeySelector = product => product.cost > 50 ? 'costly' : 'affordable';
             var productsByCost = group(products, costKeySelector);
             describeGroup(productsByCost);
         })
