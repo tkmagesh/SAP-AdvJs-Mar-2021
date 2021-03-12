@@ -22,3 +22,24 @@ Spinner.prototype.up = function(){
 Spinner.prototype.down = function(){
     return --this.__counter__;
 }
+
+
+//using symbol
+
+var Spinner = (function(){
+    var counterSymbol = Symbol();
+
+    function Spinner(){
+        //this -> new object
+        this[counterSymbol] = 0;
+        //this -> returned by default
+    }
+    Spinner.prototype.up = function(){
+        return ++this[counterSymbol];
+    };
+    Spinner.prototype.down = function(){
+        return --this[counterSymbol];
+    }
+
+    return Spinner;
+})();
