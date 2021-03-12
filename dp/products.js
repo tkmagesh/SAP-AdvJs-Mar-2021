@@ -122,3 +122,18 @@ describe('Sorting', function(){
         });
     });
 });
+
+describe('Filter', function(){
+    describe('Filtering stationary products', function(){
+        function filterStationaryProducts(){
+            var result = [];
+            for(var index = 0, count = products.length; index < count; index++)
+                if (products[index].category === 'stationary')
+                    result.push(products[index]);
+            return result;
+        }
+
+        var stationaryProducts = filterStationaryProducts();
+        console.table(stationaryProducts);
+    });
+})
