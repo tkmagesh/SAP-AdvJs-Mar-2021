@@ -136,4 +136,38 @@ describe('Filter', function(){
         var stationaryProducts = filterStationaryProducts();
         console.table(stationaryProducts);
     });
+
+    describe('Any list by any criteria', function(){
+        function filter(list, predicate){
+            var result = [];
+            for(var index = 0, count = list.length; index < count; index++)
+                if (predicate(list[index]))
+                    result.push(list[index]);
+            return result;
+        }
+
+        describe('filter stationary products', function(){
+            var stationaryProductPredicate = function(p){
+                return p.category === 'stationary';
+            };
+            var stationaryProducts = filter(products, stationaryProductPredicate);
+            console.table(stationaryProducts);
+        })
+
+        describe('filter costly products [cost > 50]', function(){
+            var costlyProductPredicate = function(product){
+                return product.cost > 50;
+            };
+            var costlyProducts = filter(products, costlyProductPredicate);
+            console.table(costlyProducts);
+        });
+
+        describe('filter understocked products [units <= 30]', function(){
+            var understockedProductPredicate = function(product){
+                return product.units <= 30;
+            };
+            var understockedProducts = filter(products, understockedProductPredicate);
+            console.table(understockedProducts);
+        })
+    })
 })
