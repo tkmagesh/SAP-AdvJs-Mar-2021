@@ -108,3 +108,29 @@ Function invocation Patterns
     As a Immediately Invoked Function Expression - IIFE
 
     Using the 'new' keyword
+
+
+Prototypal Inheritance
+
+
+    baseObject
+    objA
+    objB
+
+    objA.__proto__ -> baseObject
+    objB.__proto__ -> baseObject
+
+    ConstructorFunction.prototype 
+
+    The process of resolving an attribute by traversing through the baseObjects using the __proto__ reference is called as 'prototype hopping'
+
+    Prototype hopping happens ONLY when we READ an attribute value
+
+    1. Why is __proto__ is accessible if it is not supposed to be used in code?
+        In JavaScript, "Hiding" anything is costly.
+
+    2. How will I access the "base object"?
+        ConstructorFunction.prototype is the allowed path to access the base object.
+
+
+    var obj = {}
