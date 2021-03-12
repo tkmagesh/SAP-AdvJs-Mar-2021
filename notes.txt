@@ -149,3 +149,79 @@ ES6 (ECMAScript 6 / ES2015 / ESNext)
 9. default arguments
 10. arrow functions
 11. template strings
+12. Symbol
+13. iterators
+
+let range = {
+    from : 1,
+    to : 10,
+    [Symbol.iterator] = function(){ 
+        return {
+            current : this.from,
+            last : this.to,
+            next(){
+                if (this.current <= this.last){
+                    return { done : false, value : this.current++}
+                } else {
+                    return { done : true}
+                }
+            }
+        }
+    }
+}
+
+14. generators
+    functions that can be suspended and resumed
+
+    function *getEvenNumbers(){
+        yield 2;
+        yield 4;
+        yield 6;
+        yield 8;
+        return 10;
+    }
+
+    var iter = getEvenNumbers()
+
+    iter.next()
+
+15. classes
+
+class Employee{
+    id = 0;
+    name = '';
+    salary = 0;
+
+    constructor(id, name, salary){
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+
+    display(){
+        console.log(`id=${this.id}, name=${this.name}, salary=${this.salary}`)
+    }
+}
+
+//inheritance
+
+class FullTimeEmployee extends Employee {
+    benefits = '';
+    constructor(id, name, salary, benefits){
+        super(id, name, salary)
+        this.benefits = benefits;
+    }
+}
+
+15. nullish coalescing Operator (??)
+
+http://es6-features.org
+
+
+Async Operations
+    Operations that are initiated but not waited for their completion
+
+    1. callback
+    2. promise
+    3. async await
+    4. observables (rxjs)
