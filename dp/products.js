@@ -146,6 +146,12 @@ describe('Filter', function(){
             return result;
         }
 
+        function negate(predicateFn){
+            return function(){
+                return !predicateFn.apply(this, arguments)
+            };
+        }
+
         describe('filter stationary products', function(){
             var stationaryProductPredicate = function(p){
                 return p.category === 'stationary';
@@ -154,20 +160,44 @@ describe('Filter', function(){
             console.table(stationaryProducts);
         })
 
-        describe('filter costly products [cost > 50]', function(){
+        describe('filter products by cost', function(){
             var costlyProductPredicate = function(product){
                 return product.cost > 50;
             };
-            var costlyProducts = filter(products, costlyProductPredicate);
-            console.table(costlyProducts);
-        });
+            describe('costly products [cost > 50]', function(){
+                var costlyProducts = filter(products, costlyProductPredicate);
+                console.table(costlyProducts);
+            });
+            describe('affordable products [!costly product]', function(){
+                /* var affordableProductPredicate = function(product){
+                    return !costlyProductPredicate(product);
+                }; */
+                var affordableProductPredicate = negate(costlyProductPredicate);
+                var affordableProducts = filter(products,affordableProductPredicate);
+                console.table(affordableProducts);
+            })
+        })
 
-        describe('filter understocked products [units <= 30]', function(){
+        describe('filter products by units', function(){
             var understockedProductPredicate = function(product){
                 return product.units <= 30;
             };
-            var understockedProducts = filter(products, understockedProductPredicate);
-            console.table(understockedProducts);
+            describe('understocked products [units <= 30]', function(){
+                var understockedProducts = filter(products, understockedProductPredicate);
+                console.table(understockedProducts);
+            });
+            describe('wellstocked products [!understocked products]', function(){
+                /* var wellStockedProductPredicate = function(product){
+                    return !understockedProductPredicate(product);
+                }; */
+                var wellStockedProductPredicate = negate(understockedProductPredicate);
+                var wellstockedProducts = filter(products, wellStockedProductPredicate);
+                console.table(wellstockedProducts);
+            })
         })
+        
     })
 })
+
+/* filter affordable products [cost <= 50]
+filter wellstocked products [units > 30] */
