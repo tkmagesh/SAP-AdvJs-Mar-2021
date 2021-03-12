@@ -225,3 +225,6 @@ Async Operations
     2. promise
     3. async await
     4. observables (rxjs)
+
+tkmagesh77@gmail.com
++91-99019-11221
